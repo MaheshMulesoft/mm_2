@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="c38c9143-1900-49fa-9bbf-e06d655f963d" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="flow1Flow" doc:id="8e666879-2478-4325-92dc-1e7c448f9631" >
+		<http:listener doc:name="Listener" doc:id="c1dd610f-8dd7-46a6-88d5-b5a272995efb" config-ref="HTTP_Listener_config" path="/flow"/>
+		<logger level="INFO" doc:name="Logger" doc:id="973437e9-0bbf-4169-b39a-44d344d35dad" message="#[payload]"/>
+		<logger level="INFO" doc:name="Logger" doc:id="e6e4688f-4826-4d84-8b14-e6bb4b3c9721" message='"payload1"'/>
+		<logger level="INFO" doc:name="Logger" doc:id="08294318-ac7e-4a2b-a133-5e77e069ced8" message='"payload2"'/>
+		<logger level="INFO" doc:name="Logger" doc:id="44450bad-9d5a-42e8-a4ee-6e1260e4a2fd" message='"payload3"'/>
+		<flow-ref doc:name="Flow Reference" doc:id="fff7d364-8bcf-41c3-ae1e-c9d568fe4251" name="flow1Sub_Flow"/>
+		<flow-ref doc:name="Flow Reference" doc:id="20b2acf4-2314-4402-ac35-490c232bd114" name="privateflowFlow"/>
+	</flow>
+	<sub-flow name="flow1Sub_Flow" doc:id="ce927720-a2cc-48cf-8d44-69d2550d21fd" >
+		<logger level="INFO" doc:name="Logger" doc:id="7f79c7f0-4519-4e39-91cd-29e6fef8e55e" message="#[payload]"/>
+		<logger level="INFO" doc:name="Logger" doc:id="39f10901-ed9b-4ee7-874d-3184506cb1bd" message='"logger1"'/>
+		<logger level="INFO" doc:name="Logger" doc:id="b6e28b42-074f-4f1a-8a1a-d1f1e23e40e3" message='"logger2"'/>
+		<flow-ref doc:name="Flow Reference" doc:id="1baac163-6c53-4bab-b542-212485a1fed1" name="subflowSub_Flow"/>
+	</sub-flow>
+</mule>
